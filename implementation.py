@@ -1,7 +1,7 @@
 import glob 
 import pandas as pd 
-import xml.etree.ElementTree as ET 
 from datetime import datetime
+import defusedxml.ElementTree
 
 # CSV Extract Function
 def extract_from_csv(file_to_process): 
@@ -16,7 +16,7 @@ def extract_from_json(file_to_process):
 # XML Extract Function
 def extract_from_xml(file_to_process):
     dataframe = pd.DataFrame(columns=['car_model','year_of_manufacture','price', 'fuel'])
-    tree = ET.parse(file_to_process) 
+    tree = defusedxml.ElementTree.parse(file_to_process) 
     root = tree.getroot() 
     for person in root: 
         car_model = person.find("car_model").text 
